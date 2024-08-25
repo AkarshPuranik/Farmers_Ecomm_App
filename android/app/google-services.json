@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "899338177088",
+    "project_id": "kisanseva-c4435",
+    "storage_bucket": "kisanseva-c4435.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899338177088:android:fe12e7788439fca21aada5",
+        "android_client_info": {
+          "package_name": "com.example.gee_com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJtJt9npVJ3txkT3GmMHlxqVdq7XVvG3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,3 @@
+const APP_ID = 1782232755;
+const APP_SIGN = 'd97dcccf85d919b5812e97ba7969b266ca538acc971bd8ccc8066108533df5f2';
+
