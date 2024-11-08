@@ -26,7 +26,7 @@ class _Disease_ManagementState extends State<Disease_Management> {
               onPressed:(){
                 Navigator.pop(context,
                   MaterialPageRoute(builder: (context)=>
-                      Dashboard(token: ''),),
+                      Dashboard(),),
                 );
 
               }

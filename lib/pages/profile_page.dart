@@ -41,7 +41,9 @@ class _ProfilePageState extends State<ProfilePage> {
           addressController.text = userData['address'] ?? '';
           _profilePictureUrl = userData['profile_picture'] ?? '';
         });
+        print("User data loaded successfully.");
       } else {
+        print("User not found in Firestore.");
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('User not found.')));
       }
@@ -75,6 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
             .update({
           'profile_picture': downloadURL,
         });
+        print("Profile picture uploaded and updated in Firestore.");
       }
     } catch (e) {
       print('Error uploading profile picture: $e');
@@ -85,11 +88,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> updateUserProfile() async {
     try {
+      // Check if the user document exists
       DocumentSnapshot doc = await FirebaseFirestore.instance
           .collection('users')
           .doc(widget.userId)
           .get();
       if (doc.exists) {
+        // Update the existing document
         await FirebaseFirestore.instance
             .collection('users')
             .doc(widget.userId)
@@ -99,9 +104,11 @@ class _ProfilePageState extends State<ProfilePage> {
           'phone': phoneController.text,
           'address': addressController.text,
         });
+        print("Profile updated successfully.");
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Profile updated successfully!')));
       } else {
+        // Create a new document if it doesn't exist
         await FirebaseFirestore.instance
             .collection('users')
             .doc(widget.userId)
@@ -112,6 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
           'address': addressController.text,
           'profile_picture': _profilePictureUrl ?? '',
         });
+        print("Profile created successfully.");
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Profile created successfully!')));
       }
@@ -119,32 +127,6 @@ class _ProfilePageState extends State<ProfilePage> {
       print('Error updating user profile: $e');
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error updating profile.')));
-    }
-  }
-
-  Future<void> clearUserData() async {
-    try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(widget.userId)
-          .delete();
-      if (_profilePictureUrl != null) {
-        final ref = FirebaseStorage.instance.refFromURL(_profilePictureUrl!);
-        await ref.delete();
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('User data cleared successfully!')));
-      setState(() {
-        nameController.clear();
-        emailController.clear();
-        phoneController.clear();
-        addressController.clear();
-        _profilePictureUrl = null;
-      });
-    } catch (e) {
-      print('Error clearing user data: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error clearing user data.')));
     }
   }
 
@@ -203,38 +185,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Center(
-                  child: Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_validateInputs()) {
-                            updateUserProfile();
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('Please fill all fields')));
-                          }
-                        },
-                        child: Text('Save Changes'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green[700],
-                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          textStyle: TextStyle(fontSize: 18, color: Colors.white),
-                          foregroundColor: Colors.white, // Ensure the text color is white
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: clearUserData,
-                        child: Text('Clear Information'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red[700],
-                          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                          textStyle: TextStyle(fontSize: 18, color: Colors.white),
-                          foregroundColor: Colors.white, // Ensure the text color is white
-                        ),
-                      ),
-                    ],
+                ElevatedButton(
+                  onPressed: () {
+                    if (_validateInputs()) {
+                      updateUserProfile();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Please fill all fields')));
+                    }
+                  },
+                  child: Text('Save Changes'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green[700],
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    textStyle: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
               ],

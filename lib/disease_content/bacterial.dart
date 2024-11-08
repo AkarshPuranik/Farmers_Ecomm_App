@@ -18,100 +18,100 @@ class _Bacterial extends State<Bacterial> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:  Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed:(){
-                Navigator.pop(context,
-                  MaterialPageRoute(builder: (context)=>
-                      Dashboard(token: '',),),
-                );
+        home:  Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed:(){
+                  Navigator.pop(context,
+                    MaterialPageRoute(builder: (context)=>
+                        Dashboard(),),
+                  );
 
-              }
+                }
+            ),
+            title: const Text('Bacterial Diseases'),
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
           ),
-          title: const Text('Bacterial Diseases'),
-          backgroundColor: Colors.green,
-          foregroundColor: Colors.white,
-        ),
-        body: SingleChildScrollView(
+          body: SingleChildScrollView(
 
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              child: Column(
                   children: [
-
-                    const Padding(padding: EdgeInsets.only(left: 10)),
-                    Column(
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('assets/images/blight.jpg',
-                              width: 150,height: 150,
-                              fit: BoxFit.cover) ,
-                        ),
 
-                        ElevatedButton(onPressed: (){
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>
-                                Blight(),),
-                          );
-                        },
-                            style:ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                foregroundColor: Colors.white
+                        const Padding(padding: EdgeInsets.only(left: 10)),
+                        Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset('assets/images/blight.jpg',
+                                  width: 150,height: 150,
+                                  fit: BoxFit.cover) ,
                             ),
-                            child: const Text('Bacterial Blight')
+
+                            ElevatedButton(onPressed: (){
+                              Navigator.push(context,
+                                MaterialPageRoute(builder: (context)=>
+                                    Blight(),),
+                              );
+                            },
+                                style:ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    foregroundColor: Colors.white
+                                ),
+                                child: const Text('Bacterial Blight')
+                            ),
+
+                          ],
+
+                        ),
+                        const Padding(padding: EdgeInsets.only(right: 10)),
+                        Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset('assets/images/pustule.jpg',
+                                  width: 150,height: 150,
+                                  fit: BoxFit.cover) ,
+                            ),
+
+                            ElevatedButton(onPressed: (){
+                              Navigator.push(context,
+                                MaterialPageRoute(builder: (context)=>
+                                    Pustule(),),
+                              );
+
+                            },
+                                style:ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    foregroundColor: Colors.white
+                                ),
+                                child: const Text('Bacterial Pustule')
+                            ),
+
+                          ],
+
                         ),
 
                       ],
 
-                    ),
-                    const Padding(padding: EdgeInsets.only(right: 10)),
-                    Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('assets/images/pustule.jpg',
-                              width: 150,height: 150,
-                              fit: BoxFit.cover) ,
-                        ),
-
-                        ElevatedButton(onPressed: (){
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>
-                                Pustule(),),
-                          );
-
-                        },
-                            style:ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                foregroundColor: Colors.white
-                            ),
-                            child: const Text('Bacterial Pustule')
-                        ),
-
-                      ],
 
                     ),
 
-                  ],
 
+                  ]
+              )
 
-                ),
+          ),
 
-
-]
         )
-
-                ),
-
-            )
 
     );
 

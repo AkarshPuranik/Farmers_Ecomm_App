@@ -1,42 +1,46 @@
+// pages/splash_screen.dart
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gee_com/pages/login.dart';
 
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-class Splash extends StatefulWidget{
-  const Splash ({Key?key}):super(key:key);
-
+class SplashScreen extends StatefulWidget {
   @override
-  State<Splash> createState() => _SplashState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    _navitagetohome();
-  }
-  _navitagetohome()async{
-    await Future.delayed(Duration(milliseconds: 2000),(){});
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => SignInPage(),));
-  }
 
+    // Navigate to the login page after a delay
+    Timer(Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => SignInPage()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        body:
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/splashscreen.jpg'),
-                fit: BoxFit.cover
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Full-screen background image
+          Image.asset(
+            'assets/images/splashscreen.jpg',  // Replace with your image path
+            fit: BoxFit.cover,
+          ),
+          // Centered circular progress indicator
+          Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
             ),
           ),
-        )
+        ],
+      ),
     );
-
   }
 }

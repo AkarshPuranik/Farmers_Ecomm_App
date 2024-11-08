@@ -7,9 +7,9 @@
     <!-- Other permissions -->
 
     <application
-        android:label="gee_com"
+        android:label="Kisan Seva"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true"
         tools:replace="android:label"> <!-- Add this line -->
         <activity
